@@ -131,13 +131,22 @@ class Authentication extends Controller{
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 // signUp model method
                 if ($this->userModel->signUp($data)) {
-                    redirect('authentication/login');
-                } else {
+                    http_response_code(201);
+                    // redirect('authentication/login');
+                } else {    
                     die('samting went wrong');
                 }
             } else {
                 // Load view with errors
-                $this->view('authentication/signup', $data);
+                // $data['status'] = 'success';
+                http_response_code(400);
+
+        // Send the JSON response
+        header('Content-Type: application/json');
+        echo( json_encode($data));
+        exit;
+                // print_r(json_encode($data));
+                // $this->view('authentication/signup', $data);
             }
         } else {
             // Init data

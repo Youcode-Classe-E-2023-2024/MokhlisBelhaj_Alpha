@@ -16,37 +16,36 @@
             <form id="registrationForm" action="<?php echo URLROOT; ?>authentication/signup" method="post" class="mt-6">
                 <div>
                     <label class="block text-gray-700">Name</label>
-                    <input type="text" name="name" id="" placeholder="Enter Name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none  <?php echo (!empty($data['name_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['name'] ?>" autofocus autocomplete required>
-                    <?php if (!empty($data["name_err"])) : ?>
-                        <span class="text-red-500 text-sm"><?php echo $data["name_err"] ?></span>
-                    <?php endif; ?>
+                    <input type="text" name="name" id="name" placeholder="Enter Name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none " value="<?php echo $data['name'] ?>" autofocus autocomplete>
+
+                    <span id="name_err" class="text-red-500 text-sm"></span>
+
 
                 </div>
                 <div>
                     <label class="block text-gray-700">Email Address</label>
-                    <input type="email" name="email" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none  <?php echo (!empty($data['email_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['email'] ?>" autofocus autocomplete required>
-                    <?php if (!empty($data["email_err"])) : ?>
-                        <span class="text-red-500 text-sm"><?php echo $data["email_err"] ?></span>
-                    <?php endif; ?>
+                    <input type="email" name="email" id="email" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none " value="" autofocus autocomplete required>
+                    <span id="email_err" class="text-red-500 text-sm"></span>
+
 
                 </div>
 
                 <div class="mt-4 text">
                     <label class="block text-gray-700">Password</label>
-                    <input type="password" name="password" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-                focus:bg-white focus:outline-none <?php echo (!empty($data['password_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['password'] ?>" required>
-                    <?php if (!empty($data["password_err"])) : ?>
-                        <span class="text-red-500 text-sm"><?php echo $data["password_err"] ?></span>
-                    <?php endif; ?>
+                    <input type="password" name="password" id="password" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                focus:bg-white focus:outline-none " value="" required>
+
+                    <span id="password_err" class="text-red-500 text-sm"></span>
+
 
                 </div>
                 <div class="mt-4 text">
                     <label class="block text-gray-700">confirm password</label>
-                    <input type="password" name="confirm_password" id="" placeholder="Enter confirm password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-                focus:bg-white focus:outline-none <?php echo (!empty($data['confirm_password_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['confirm_password'] ?>" required>
-                    <?php if (!empty($data["confirm_password_err"])) : ?>
-                        <span class="text-red-500 text-sm"><?php echo $data["confirm_password_err"] ?></span>
-                    <?php endif; ?>
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Enter confirm password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                focus:bg-white focus:outline-none " value="" required>
+
+                    <span id="confirm_password_err" class="text-red-500 text-sm"></span>
+
 
                 </div>
 
@@ -73,30 +72,4 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        // Handle form submission
-        $("#registrationForm").submit(function (event) {
-            // Prevent the default form submission
-            event.preventDefault();
-
-            // Serialize the form data
-            var formData = $(this).serialize();
-
-            // Perform AJAX request
-            $.ajax({
-                type: "POST",
-                url: $(this).attr("action"),
-                data: formData,
-                success: function (response) {
-                    // Handle the success response
-                    console.log(response);
-                },
-                error: function (error) {
-                    // Handle the error response
-                    console.log(error);
-                }
-            });
-        });
-    });
-</script>
+<script src="<?php echo URLROOT ?>public/js/signup.js"></script>
