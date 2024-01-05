@@ -13,8 +13,7 @@
 
             <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12">Log in to your account</h1>
 
-
-            <form action="<?php echo URLROOT; ?>authentication/signup" method="post" class="mt-6">
+            <form id="registrationForm" action="<?php echo URLROOT; ?>authentication/signup" method="post" class="mt-6">
                 <div>
                     <label class="block text-gray-700">Name</label>
                     <input type="text" name="name" id="" placeholder="Enter Name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none  <?php echo (!empty($data['name_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['name'] ?>" autofocus autocomplete required>
@@ -72,3 +71,32 @@
         <img src="https://source.unsplash.com/random" alt="" class="w-full h-full object-cover">
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Handle form submission
+        $("#registrationForm").submit(function (event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+
+            // Perform AJAX request
+            $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: formData,
+                success: function (response) {
+                    // Handle the success response
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Handle the error response
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
