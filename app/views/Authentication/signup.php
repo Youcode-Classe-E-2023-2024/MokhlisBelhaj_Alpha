@@ -70,6 +70,5 @@
         <img src="https://source.unsplash.com/random" alt="" class="w-full h-full object-cover">
     </div>
 </section>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script src="<?php echo URLROOT ?>public/js/signup.js"></script>

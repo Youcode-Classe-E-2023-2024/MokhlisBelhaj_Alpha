@@ -1,5 +1,6 @@
 <?php require APPROOT . '\views\include\header.php'; ?>
 
+
 <!-- component -->
 <section class="flex flex-col md:flex-row h-screen items-center">
 
@@ -15,24 +16,21 @@
 
       <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12">Log in to your account</h1>
 
-      
-      <form  action="<?php echo URLROOT; ?>authentication/login" method="post" class="mt-6">
+      <form id="loginForm" action="<?php echo URLROOT; ?>authentication/login"  class="mt-6">
+
         <div>
           <label class="block text-gray-700">Email Address</label>
-          <input type="email" name="email" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none  <?php echo (!empty($data['email_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['email']?>" autofocus autocomplete required>
-                        <?php if (!empty($data["email_err"])) : ?>
-                            <span class="text-red-500 text-sm"><?php echo $data["email_err"] ?></span>
-                        <?php endif; ?>
+          <input type="email" name="email" id="email" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  autofocus autocomplete >
+                       
+                            <span id="email_err" class="text-red-500 text-sm"></span>
+                        
           
         </div>
 
         <div class="mt-4 text">
           <label class="block text-gray-700">Password</label>
-          <input type="password" name="password" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-                focus:bg-white focus:outline-none <?php echo (!empty($data['password_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['password']?>"required>
-                        <?php if (!empty($data["password_err"])) : ?>
-                            <span class="text-red-500 text-sm"><?php echo $data["password_err"] ?></span>
-                        <?php endif; ?>
+          <input type="password" name="password" id="password" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none " value=""required>
+                            <span id="password_err" class="text-red-500 text-sm"></span>
              
         </div>
 
@@ -55,3 +53,49 @@
   </div>
 
 </section>
+<script>
+    $(document).ready(function () {
+        // Handle form submission
+        $("#loginForm").submit(function (event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+
+            // Perform an AJAX request
+            $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: formData,
+                success: function (response) {
+                    // Handle the success response
+                    console.log(response);
+                    window.location.href = "http://localhost/MokhlisBelhaj_Alpha/";
+
+                    // You can redirect or perform other actions based on the response
+                },
+                error: function (error) {
+                    // Handle the error response
+                    // console.log(error);
+                    data = error.responseJSON;
+
+                    $("#email_err").text(data.email_err);
+                if (data.email_err) {
+                    $("#email").addClass('border-red-500');
+                } else {
+                    $("#email").removeClass('border-red-500');
+                }
+
+                $("#password_err").text(data.password_err);
+                if (data.password_err !== "") {
+                    $("#password").addClass('border-red-500');
+                } else {
+                    $("#password").removeClass('border-red-500');
+                }
+                }
+            });
+        });
+    });
+</script>
+

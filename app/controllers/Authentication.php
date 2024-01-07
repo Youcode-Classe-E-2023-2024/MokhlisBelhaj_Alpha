@@ -6,7 +6,7 @@ class Authentication extends Controller{
         $this->userModel = $this->model('User');
     }
     public function login()
-
+    
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           
@@ -29,20 +29,34 @@ class Authentication extends Controller{
             // elseif (strlen($data['password']) < 6) {
             //     $data['password_err'] = 'Password must be at least 6 characters';
             // }
+            if(!empty($data['password']&& !empty($data['email']))) {
             if ($this->userModel->FindUserByEmail($data['email'])) {
             } else {
                 $data['email_err'] = 'no user found';
-            }
+            }}
             if (empty($data["email_err"]) && empty($data['password_err'])) {
                 $loggedInUser = $this->userModel->signIn($data['email'], $data['password']);
                 if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
                 } else {
                     $data['password_err'] = 'password is incorrect';
-                    $this->view('authentication/login', $data);
+                    // $this->view('authentication/login', $data);
+                    http_response_code(400);
+
+        // Send the JSON response
+        header('Content-Type: application/json');
+        echo( json_encode($data));
+        exit;
                 }
             } else {
-                $this->view('authentication/login', $data);
+                // $this->view('authentication/login', $data);
+                http_response_code(400);
+
+        // Send the JSON response
+        header('Content-Type: application/json');
+        echo( json_encode($data));
+
+        exit;
             }
         } else {
             $data = [
@@ -62,7 +76,11 @@ class Authentication extends Controller{
        
 
 
-        redirect('');
+        http_response_code(200);
+
+        // Send the JSON response
+        
+        exit;
     }
     public function logOut()
     {
