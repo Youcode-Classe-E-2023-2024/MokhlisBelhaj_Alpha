@@ -10,10 +10,11 @@ redirect('authentication/login');
     public function index(){
         $this->view('dashboard/index');
     }
-    public function users(){
+    public function post(){
         $this->view('dashboard/users');
     }
-    public function products(){
-        $this->view('dashboard/products');
+    public function postsedite($id){
+        $data['Postid'] = $id;
+        $this->view('dashboard/products',$data);
     }
 }

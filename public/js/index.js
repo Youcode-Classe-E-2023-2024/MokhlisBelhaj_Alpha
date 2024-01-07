@@ -120,3 +120,11 @@ $(document).ready(function() {
         }
     });
 });
+function generatePDF() {
+    var element = document.getElementById('main');
+    if (confirm('Do you want to generate PDF?')) {
+        var pdf = html2pdf(element, {
+            filename: 'dashboard.pdf'
+        });;
+    }
+}
