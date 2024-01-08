@@ -365,7 +365,7 @@
         <form action="" class="project-form">
             <input type="hidden" name='userId' value="<?php echo $_SESSION["user_id"]; ?>">
             <div class="flex items-center justify-center p-12">
-                <div id="newinp" class="mx-auto w-full max-w-[550px]">
+                <div id="editinp" class="mx-auto w-full max-w-[550px]">
                     <div class="mx-3">
                         <div class="w-full px-3">
                             <div class="mb-5">
@@ -397,12 +397,12 @@
     </div>
 </div>
 <!-- -----------edit user------------- -->
-<div id="editUserModal" class="  float-left hidden fixed inset-0 z-10 overflow-hidden backdrop-blur-lg flex items-center justify-center transition-transform duration-300">
+<div id="editUserModal" class="  float-left hidden fixed inset-0 z-10 backdrop-blur-lg flex items-center justify-center transition-transform duration-300">
     <div class="modal-container p-6 backdrop-blur-sm bg-white/90 w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 rounded-md shadow-sm">
         <h2 class="text-2xl font-semibold mb-6">update user</h2>
         <form action="" class="project-form">
             <div class="flex items-center justify-center p-12">
-                <div id="newinp" class="mx-auto w-full max-w-[550px]">
+                <div id="edituserinp" class="mx-auto w-full max-w-[550px]">
                     <div class="mx-3">
                         <div class="w-full px-3">
                             <div class="mb-5">
@@ -434,8 +434,8 @@
     </div>
 </div>
 <!-- --------------------------- add post----------------------------------------------------------------- -->
-<div id="myModal" class="hidden fixed inset-0 z-10 overflow-hidden backdrop-blur-lg flex items-center justify-center transition-transform duration-300">
-    <div class="modal-container p-6 backdrop-blur-sm bg-white/90 w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 rounded-md shadow-sm">
+<div id="myModal" class="hidden fixed inset-0 z-10 overflow-y-auto   backdrop-blur-lg flex items-center justify-center transition-transform duration-300">
+    <div class="modal-container overflow-y-auto h-fit p-6 backdrop-blur-sm bg-white/90 w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 rounded-md shadow-sm">
         <h2 class="text-2xl font-semibold mb-6">Create New Project</h2>
         <form action="" class="project-form">
             <input type="hidden" name='userId' value="<?php echo $_SESSION["user_id"]; ?>">
@@ -526,15 +526,18 @@
         `;
 
         $("#newinp").append(newPostHtml);
+        console.log('newPostHtml');
     }
 
     $("#openModalBtn").on("click", openModal);
 
     $("#addNewPostBtn").on("click", addNewPost);
+  
+    
 </script>
 <!-- ----------add new user----------- -->
-<div id="userModal" class="hidden  fixed inset-0 z-10 overflow-hidden backdrop-blur-lg flex items-center justify-center transition-transform duration-300">
-    <div class="modal-container   p-6 backdrop-blur-sm bg-white/90 w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 rounded-md shadow-sm">
+<div id="userModal" class="hidden  fixed inset-0 z-10 overflow-y-auto h-full backdrop-blur-lg flex items-center justify-center transition-transform duration-300">
+    <div class="modal-container p-6 backdrop-blur-sm bg-white/90 w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 rounded-md shadow-sm">
         <h2 class="text-2xl font-semibold mb-6">Create New user</h2>
         <form action="" class="user-form">
             <input type="hidden" name='userId' value="<?php echo $_SESSION["user_id"]; ?>">
